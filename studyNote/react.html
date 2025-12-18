@@ -1,0 +1,920 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-rc.26" />
+    <meta name="theme" content="VuePress Theme Hope 2.0.0-rc.99" />
+    <style>
+      :root {
+        --vp-c-bg: #fff;
+      }
+
+      [data-theme="dark"] {
+        --vp-c-bg: #1b1b1f;
+      }
+
+      html,
+      body {
+        background: var(--vp-c-bg);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem("vuepress-theme-hope-scheme");
+      const systemDarkMode =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+      if (userMode === "dark" || (userMode !== "light" && systemDarkMode)) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    </script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"基础","image":[""],"dateModified":null,"author":[{"@type":"Person","name":"KlayPeter","url":"https://github.com/KlayPeter"}]}</script><meta property="og:url" content="https://klaypeter.github.io/learning-share/studyNote/react.html"><meta property="og:site_name" content="KlayPeter的学习博客"><meta property="og:title" content="基础"><meta property="og:description" content="基础 创建和嵌套组件 React 应用程序是由 组件 组成的。一个组件是 UI（用户界面）的一部分，它拥有自己的逻辑和外观。组件可以小到一个按钮，也可以大到整个页面。 React 组件是返回标签的 JavaScript 函数： React 组件必须以大写字母开头，而 HTML 标签则必须是小写字母。 export default 关键字指定了文件中的主..."><meta property="og:type" content="article"><meta property="og:locale" content="zh-CN"><title>基础 | KlayPeter的学习博客</title><meta name="description" content="基础 创建和嵌套组件 React 应用程序是由 组件 组成的。一个组件是 UI（用户界面）的一部分，它拥有自己的逻辑和外观。组件可以小到一个按钮，也可以大到整个页面。 React 组件是返回标签的 JavaScript 函数： React 组件必须以大写字母开头，而 HTML 标签则必须是小写字母。 export default 关键字指定了文件中的主...">
+    <link rel="preload" href="/learning-share/assets/style-C1YZEHBb.css" as="style"><link rel="stylesheet" href="/learning-share/assets/style-C1YZEHBb.css">
+    <link rel="modulepreload" href="/learning-share/assets/app-6qBmPyyI.js"><link rel="modulepreload" href="/learning-share/assets/react.html-DXpZtXIk.js"><link rel="modulepreload" href="/learning-share/assets/plugin-vue_export-helper-DlAUqK2U.js">
+    <link rel="prefetch" href="/learning-share/assets/index.html-DSPJh-jE.js" as="script"><link rel="prefetch" href="/learning-share/assets/browser-principle.html-CVKRbnhP.js" as="script"><link rel="prefetch" href="/learning-share/assets/idea.html-CoxJfJ9X.js" as="script"><link rel="prefetch" href="/learning-share/assets/animation.html-BM_xyG71.js" as="script"><link rel="prefetch" href="/learning-share/assets/idea.html-DThtq6gM.js" as="script"><link rel="prefetch" href="/learning-share/assets/transition.html-Co-w5Emj.js" as="script"><link rel="prefetch" href="/learning-share/assets/algorithm-1.html-DPEPvhvy.js" as="script"><link rel="prefetch" href="/learning-share/assets/algorithm-2.html-FtfofCEC.js" as="script"><link rel="prefetch" href="/learning-share/assets/css.html-CMqDLi43.js" as="script"><link rel="prefetch" href="/learning-share/assets/html.html-D3sO5_b2.js" as="script"><link rel="prefetch" href="/learning-share/assets/idea.html-_ZeKA81i.js" as="script"><link rel="prefetch" href="/learning-share/assets/javascript.html-BYwtcUtS.js" as="script"><link rel="prefetch" href="/learning-share/assets/os.html-DsOdMXvX.js" as="script"><link rel="prefetch" href="/learning-share/assets/vue-1.html-C0l4DgNB.js" as="script"><link rel="prefetch" href="/learning-share/assets/vue-2.html-FnNgW4iM.js" as="script"><link rel="prefetch" href="/learning-share/assets/angular.html-Dww9OKo_.js" as="script"><link rel="prefetch" href="/learning-share/assets/api-methods.html-lOJ9qq9I.js" as="script"><link rel="prefetch" href="/learning-share/assets/auth.html-Drebyzeq.js" as="script"><link rel="prefetch" href="/learning-share/assets/axios.html-CWlsVvnz.js" as="script"><link rel="prefetch" href="/learning-share/assets/cache.html-BG2wsKbh.js" as="script"><link rel="prefetch" href="/learning-share/assets/for-loops.html-CmFfcB35.js" as="script"><link rel="prefetch" href="/learning-share/assets/git-workflow.html-OxkDzrHf.js" as="script"><link rel="prefetch" href="/learning-share/assets/git.html-BXGNqQu9.js" as="script"><link rel="prefetch" href="/learning-share/assets/gulp.html-KbObkCUf.js" as="script"><link rel="prefetch" href="/learning-share/assets/idea.html-pCzOH7Bo.js" as="script"><link rel="prefetch" href="/learning-share/assets/indexeddb.html-StxwMEip.js" as="script"><link rel="prefetch" href="/learning-share/assets/jquery.html-h93hCNZi.js" as="script"><link rel="prefetch" href="/learning-share/assets/nginx.html-BQ0Yg_L7.js" as="script"><link rel="prefetch" href="/learning-share/assets/regex-complete.html-yDjQibmi.js" as="script"><link rel="prefetch" href="/learning-share/assets/regular-expression.html-urBAt2m9.js" as="script"><link rel="prefetch" href="/learning-share/assets/scss.html-C4VcXq41.js" as="script"><link rel="prefetch" href="/learning-share/assets/ssr.html-MAq8oFj1.js" as="script"><link rel="prefetch" href="/learning-share/assets/storage.html-CIc2seqe.js" as="script"><link rel="prefetch" href="/learning-share/assets/tailwindcss.html-CXG9kz5Q.js" as="script"><link rel="prefetch" href="/learning-share/assets/typescript.html-C1YDcFK-.js" as="script"><link rel="prefetch" href="/learning-share/assets/vite.html-DjW90FXz.js" as="script"><link rel="prefetch" href="/learning-share/assets/vue-state.html-DVJie7Rc.js" as="script"><link rel="prefetch" href="/learning-share/assets/web-crawler.html-Dvo29THT.js" as="script"><link rel="prefetch" href="/learning-share/assets/web-worker.html-DKAcqg1u.js" as="script"><link rel="prefetch" href="/learning-share/assets/webpack.html-C09PCugh.js" as="script"><link rel="prefetch" href="/learning-share/assets/xml.html-5-wmbNcN.js" as="script"><link rel="prefetch" href="/learning-share/assets/advanced.html-D47UPVLx.js" as="script"><link rel="prefetch" href="/learning-share/assets/ant-design.html-C8dFuAME.js" as="script"><link rel="prefetch" href="/learning-share/assets/basics.html-2lzfjHvz.js" as="script"><link rel="prefetch" href="/learning-share/assets/hooks.html-CR0JJN_m.js" as="script"><link rel="prefetch" href="/learning-share/assets/nextjs.html-D1ezcAxU.js" as="script"><link rel="prefetch" href="/learning-share/assets/open-source.html-CHfMtGfq.js" as="script"><link rel="prefetch" href="/learning-share/assets/react-native.html-DcAQpneJ.js" as="script"><link rel="prefetch" href="/learning-share/assets/router.html-D5DPggnt.js" as="script"><link rel="prefetch" href="/learning-share/assets/state-management.html-DTd33sah.js" as="script"><link rel="prefetch" href="/learning-share/assets/typescript.html-Df8G-mle.js" as="script"><link rel="prefetch" href="/learning-share/assets/404.html-CNumq6ML.js" as="script"><link rel="prefetch" href="/learning-share/assets/index.html-CxkbEbDJ.js" as="script"><link rel="prefetch" href="/learning-share/assets/index.html-BCzkDggj.js" as="script"><link rel="prefetch" href="/learning-share/assets/index.html-B_5GTyYg.js" as="script"><link rel="prefetch" href="/learning-share/assets/index.html-CViJbQ8I.js" as="script"><link rel="prefetch" href="/learning-share/assets/index.html-Cz-3OOzZ.js" as="script"><link rel="prefetch" href="/learning-share/assets/photoswipe.esm-CKV1Bsxh.js" as="script">
+  </head>
+  <body>
+    <div id="app"><!--[--><!--[--><!--[--><span tabindex="-1"></span><a href="#main-content" class="vp-skip-link sr-only">跳至主要內容</a><!--]--><!--[--><div class="theme-container external-link-icon has-toc" vp-container><!--[--><header id="navbar" class="vp-navbar" vp-navbar><div class="vp-navbar-start"><button type="button" class="vp-toggle-sidebar-button" title="Toggle Sidebar"><span class="icon"></span></button><!--[--><a class="route-link vp-brand" href="/learning-share/" aria-label="带我回家"><!----><!----><span class="vp-site-name">KlayPeter的学习博客</span></a><!--]--></div><div class="vp-navbar-center"><!--[--><nav class="vp-nav-links"><div class="vp-nav-item hide-in-mobile"><a class="route-link auto-link" href="/learning-share/" aria-label="首页"><!--[--><i class="vp-icon fas fa-home" sizing="height"></i><!--]-->首页<!----></a></div><div class="vp-nav-item hide-in-mobile"><a class="route-link auto-link" href="/learning-share/studyNote/idea.html" aria-label="学习笔记"><!--[--><i class="vp-icon fas fa-book" sizing="height"></i><!--]-->学习笔记<!----></a></div><div class="vp-nav-item hide-in-mobile"><a class="route-link auto-link" href="/learning-share/cssNote/idea.html" aria-label="CSS笔记"><!--[--><i class="vp-icon fas fa-palette" sizing="height"></i><!--]-->CSS笔记<!----></a></div><div class="vp-nav-item hide-in-mobile"><a class="route-link auto-link" href="/learning-share/interview/idea.html" aria-label="面试"><!--[--><i class="vp-icon fas fa-briefcase" sizing="height"></i><!--]-->面试<!----></a></div><div class="vp-nav-item hide-in-mobile"><a class="route-link auto-link" href="/learning-share/bookNote/idea.html" aria-label="书籍笔记"><!--[--><i class="vp-icon fas fa-book-open" sizing="height"></i><!--]-->书籍笔记<!----></a></div><div class="vp-nav-item hide-in-mobile"><a class="auto-link external-link" href="https://github.com/KlayPeter/learning-share" aria-label="Github" rel="noopener noreferrer" target="_blank"><!--[--><i class="vp-icon fas fab fa-github" sizing="height"></i><!--]-->Github<!----></a></div></nav><!--]--></div><div class="vp-navbar-end"><!--[--><!----><!----><div class="vp-nav-item hide-in-mobile"><button type="button" class="vp-color-mode-switch" id="color-mode-switch"><svg xmlns="http://www.w3.org/2000/svg" class="icon auto-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="auto icon" name="auto" style="display:block;"><path d="M512 992C246.92 992 32 777.08 32 512S246.92 32 512 32s480 214.92 480 480-214.92 480-480 480zm0-840c-198.78 0-360 161.22-360 360 0 198.84 161.22 360 360 360s360-161.16 360-360c0-198.78-161.22-360-360-360zm0 660V212c165.72 0 300 134.34 300 300 0 165.72-134.28 300-300 300z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon dark-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="dark icon" name="dark" style="display:none;"><path d="M524.8 938.667h-4.267a439.893 439.893 0 0 1-313.173-134.4 446.293 446.293 0 0 1-11.093-597.334A432.213 432.213 0 0 1 366.933 90.027a42.667 42.667 0 0 1 45.227 9.386 42.667 42.667 0 0 1 10.24 42.667 358.4 358.4 0 0 0 82.773 375.893 361.387 361.387 0 0 0 376.747 82.774 42.667 42.667 0 0 1 54.187 55.04 433.493 433.493 0 0 1-99.84 154.88 438.613 438.613 0 0 1-311.467 128z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon light-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="light icon" name="light" style="display:none;"><path d="M952 552h-80a40 40 0 0 1 0-80h80a40 40 0 0 1 0 80zM801.88 280.08a41 41 0 0 1-57.96-57.96l57.96-58a41.04 41.04 0 0 1 58 58l-58 57.96zM512 752a240 240 0 1 1 0-480 240 240 0 0 1 0 480zm0-560a40 40 0 0 1-40-40V72a40 40 0 0 1 80 0v80a40 40 0 0 1-40 40zm-289.88 88.08-58-57.96a41.04 41.04 0 0 1 58-58l57.96 58a41 41 0 0 1-57.96 57.96zM192 512a40 40 0 0 1-40 40H72a40 40 0 0 1 0-80h80a40 40 0 0 1 40 40zm30.12 231.92a41 41 0 0 1 57.96 57.96l-57.96 58a41.04 41.04 0 0 1-58-58l58-57.96zM512 832a40 40 0 0 1 40 40v80a40 40 0 0 1-80 0v-80a40 40 0 0 1 40-40zm289.88-88.08 58 57.96a41.04 41.04 0 0 1-58 58l-57.96-58a41 41 0 0 1 57.96-57.96z"></path></svg></button></div><!----><!--]--><button type="button" class="vp-toggle-navbar-button" aria-label="Toggle Navbar" aria-expanded="false" aria-controls="nav-screen"><span><span class="vp-top"></span><span class="vp-middle"></span><span class="vp-bottom"></span></span></button></div></header><!----><!--]--><!----><div class="toggle-sidebar-wrapper"><span class="arrow start"></span></div><aside id="sidebar" class="vp-sidebar" vp-sidebar><!----><ul class="vp-sidebar-links"><li><section class="vp-sidebar-group"><p class="vp-sidebar-header active"><i class="vp-icon fas fa-book fa-fw" sizing="both"></i><span class="vp-sidebar-title">学习笔记</span><!----></p><ul class="vp-sidebar-links"><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/idea.html" aria-label="简介"><!---->简介<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/xml.html" aria-label="学习 XML"><!---->学习 XML<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/webpack.html" aria-label="学习 Webpack"><!---->学习 Webpack<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/ssr.html" aria-label="学习 SSR"><!---->学习 SSR<!----></a></li><li><a class="route-link route-link-active auto-link vp-sidebar-link active" href="/learning-share/studyNote/react.html" aria-label="学习 React"><!---->学习 React<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/regular-expression.html" aria-label="正则表达式"><!---->正则表达式<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/nginx.html" aria-label="学习 Nginx"><!---->学习 Nginx<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/git.html" aria-label="学习 Git"><!---->学习 Git<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/git-workflow.html" aria-label="Git 流程和实例"><!---->Git 流程和实例<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/typescript.html" aria-label="学习 TypeScript"><!---->学习 TypeScript<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/axios.html" aria-label="Axios 攻略"><!---->Axios 攻略<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/web-crawler.html" aria-label="爬虫"><!---->爬虫<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/auth.html" aria-label="验证请求头、登录与认证"><!---->验证请求头、登录与认证<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/angular.html" aria-label="学习 Angular"><!---->学习 Angular<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/api-methods.html" aria-label="前端接口方式总结"><!---->前端接口方式总结<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/web-worker.html" aria-label="学习 Web Worker"><!---->学习 Web Worker<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/indexeddb.html" aria-label="学习 IndexedDB"><!---->学习 IndexedDB<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/for-loops.html" aria-label="For 循环遍历"><!---->For 循环遍历<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/storage.html" aria-label="前端数据存储"><!---->前端数据存储<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/vue-state.html" aria-label="Vue 状态管理"><!---->Vue 状态管理<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/tailwindcss.html" aria-label="学习 TailwindCSS"><!---->学习 TailwindCSS<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/vite.html" aria-label="学习 Vite"><!---->学习 Vite<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/scss.html" aria-label="学习 SCSS"><!---->学习 SCSS<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/gulp.html" aria-label="学习 Gulp"><!---->学习 Gulp<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/jquery.html" aria-label="学习 jQuery"><!---->学习 jQuery<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/learning-share/studyNote/cache.html" aria-label="前端缓存"><!---->前端缓存<!----></a></li></ul></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-header clickable" type="button"><i class="vp-icon fas fab fa-react fa-fw" sizing="both"></i><span class="vp-sidebar-title">React 系列</span><span class="vp-arrow end"></span></button><!----></section></li></ul><!----></aside><!--[--><main id="main-content" class="vp-page"><!--[--><!----><!----><nav class="vp-breadcrumb disable"></nav><div class="vp-page-title"><h1><!---->基础</h1><div class="page-info"><span class="page-author-info" aria-label="作者🖊" data-balloon-pos="up"><svg xmlns="http://www.w3.org/2000/svg" class="icon author-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="author icon" name="author"><path d="M649.6 633.6c86.4-48 147.2-144 147.2-249.6 0-160-128-288-288-288s-288 128-288 288c0 108.8 57.6 201.6 147.2 249.6-121.6 48-214.4 153.6-240 288-3.2 9.6 0 19.2 6.4 25.6 3.2 9.6 12.8 12.8 22.4 12.8h704c9.6 0 19.2-3.2 25.6-12.8 6.4-6.4 9.6-16 6.4-25.6-25.6-134.4-121.6-240-243.2-288z"></path></svg><span><a class="page-author-item" href="https://github.com/KlayPeter" target="_blank" rel="noopener noreferrer">KlayPeter</a></span><span property="author" content="KlayPeter"></span></span><!----><!----><!----><span class="page-reading-time-info" aria-label="阅读时间⌛" data-balloon-pos="up"><svg xmlns="http://www.w3.org/2000/svg" class="icon timer-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="timer icon" name="timer"><path d="M799.387 122.15c4.402-2.978 7.38-7.897 7.38-13.463v-1.165c0-8.933-7.38-16.312-16.312-16.312H256.33c-8.933 0-16.311 7.38-16.311 16.312v1.165c0 5.825 2.977 10.874 7.637 13.592 4.143 194.44 97.22 354.963 220.201 392.763-122.204 37.542-214.893 196.511-220.2 389.397-4.661 5.049-7.638 11.651-7.638 19.03v5.825h566.49v-5.825c0-7.379-2.849-13.981-7.509-18.9-5.049-193.016-97.867-351.985-220.2-389.527 123.24-37.67 216.446-198.453 220.588-392.892zM531.16 450.445v352.632c117.674 1.553 211.787 40.778 211.787 88.676H304.097c0-48.286 95.149-87.382 213.728-88.676V450.445c-93.077-3.107-167.901-81.297-167.901-177.093 0-8.803 6.99-15.793 15.793-15.793 8.803 0 15.794 6.99 15.794 15.793 0 80.261 63.69 145.635 142.01 145.635s142.011-65.374 142.011-145.635c0-8.803 6.99-15.793 15.794-15.793s15.793 6.99 15.793 15.793c0 95.019-73.789 172.82-165.96 177.093z"></path></svg><span>大约 15 分钟</span><meta property="timeRequired" content="PT15M"></span><!----><!----></div><hr></div><!----><div class="" vp-content><!----><div id="markdown-content"><h1 id="基础" tabindex="-1"><a class="header-anchor" href="#基础"><span>基础</span></a></h1><h2 id="创建和嵌套组件" tabindex="-1"><a class="header-anchor" href="#创建和嵌套组件"><span>创建和嵌套组件</span></a></h2><p>React 应用程序是由 <strong>组件</strong> 组成的。一个组件是 UI（用户界面）的一部分，它拥有自己的逻辑和外观。组件可以小到一个按钮，也可以大到整个页面。</p><p>React 组件是返回标签的 JavaScript 函数：</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>function MyButton() {</span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;button&gt;</span></span>
+<span class="line"><span>      我是一个按钮</span></span>
+<span class="line"><span>    &lt;/button&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>export default function MyApp() {</span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;div&gt;</span></span>
+<span class="line"><span>      &lt;h1&gt;欢迎来到我的应用&lt;/h1&gt;</span></span>
+<span class="line"><span>      &lt;MyButton /&gt;</span></span>
+<span class="line"><span>    &lt;/div&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><blockquote><p>React 组件必须以大写字母开头，而 HTML 标签则必须是小写字母。</p><p><code>export default</code> 关键字指定了文件中的主要组件。</p></blockquote><h2 id="使用-jsx-编写标签" tabindex="-1"><a class="header-anchor" href="#使用-jsx-编写标签"><span>使用 JSX 编写标签</span></a></h2><p>上面所使用的标签语法被称为 <em>JSX</em>，是可选的但是大多数React项目也会使用</p><p>JSX 比 HTML 更加严格，可以留意学习JSX的要求</p><h2 id="添加样式" tabindex="-1"><a class="header-anchor" href="#添加样式"><span>添加样式</span></a></h2><p>以使用 <code>className</code> 来指定一个 CSS 的 class。它与 HTML 的 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes/class" target="_blank" rel="noopener noreferrer"><code>class</code></a> 属性的工作方式相同</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-"><span class="line"><span>&lt;img className=&quot;avatar&quot; /&gt;</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div></div></div><p>然后，你可以在一个单独的 CSS 文件中为它编写 CSS 规则</p><blockquote><p>React 并没有规定你如何添加 CSS 文件。最简单的方式是使用 HTML 的 <code>&lt;link&gt;</code>标签。</p></blockquote><h2 id="显示数据" tabindex="-1"><a class="header-anchor" href="#显示数据"><span>显示数据</span></a></h2><p>JSX 会让你把标签放到 JavaScript 中。而大括号会让你 “回到” JavaScript 中</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>return (</span></span>
+<span class="line"><span>  &lt;h1&gt;</span></span>
+<span class="line"><span>    {user.name}</span></span>
+<span class="line"><span>  &lt;/h1&gt;</span></span>
+<span class="line"><span>);</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>以将 JSX 属性 “转义到 JavaScript”，但你必须使用大括号 <strong>而非</strong> 引号</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>const user = {</span></span>
+<span class="line"><span>  name: &#39;Hedy Lamarr&#39;,</span></span>
+<span class="line"><span>  imageUrl: &#39;https://i.imgur.com/yXOvdOSs.jpg&#39;,</span></span>
+<span class="line"><span>  imageSize: 90,</span></span>
+<span class="line"><span>};</span></span>
+<span class="line"><span>// className=&quot;avatar&quot; 是将 &quot;avatar&quot; 字符串传递给 className，作为 CSS 的 class。但 src={user.imageUrl} 会读取 JavaScript 的 user.imageUrl 变量</span></span>
+<span class="line"><span>export default function Profile() {</span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;&gt;</span></span>
+<span class="line"><span>      &lt;h1&gt;{user.name}&lt;/h1&gt;</span></span>
+<span class="line"><span>      &lt;img</span></span>
+<span class="line"><span>        className=&quot;avatar&quot;</span></span>
+<span class="line"><span>        src={user.imageUrl}</span></span>
+<span class="line"><span>        alt={&#39;Photo of &#39; + user.name}</span></span>
+<span class="line"><span>        style={{
+          width: user.imageSize,
+          height: user.imageSize
+        }}</span></span>
+<span class="line"><span>      /&gt;</span></span>
+<span class="line"><span>    &lt;/&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><blockquote><p>也可以把更为复杂的表达式放入 JSX 的大括号内，例如 字符串拼接</p></blockquote><h2 id="条件渲染" tabindex="-1"><a class="header-anchor" href="#条件渲染"><span>条件渲染</span></a></h2><p>React 没有特殊的语法来编写条件语句，因此你使用的就是普通的 JavaScript 代码</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>let content;</span></span>
+<span class="line"><span>if (isLoggedIn) {</span></span>
+<span class="line"><span>  content = &lt;AdminPanel /&gt;;</span></span>
+<span class="line"><span>} else {</span></span>
+<span class="line"><span>  content = &lt;LoginForm /&gt;;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>return (</span></span>
+<span class="line"><span>  &lt;div&gt;</span></span>
+<span class="line"><span>    {content}</span></span>
+<span class="line"><span>  &lt;/div&gt;</span></span>
+<span class="line"><span>);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>&lt;div&gt;</span></span>
+<span class="line"><span>  {isLoggedIn ? (</span></span>
+<span class="line"><span>    &lt;AdminPanel /&gt;</span></span>
+<span class="line"><span>  ) : (</span></span>
+<span class="line"><span>    &lt;LoginForm /&gt;</span></span>
+<span class="line"><span>  )}</span></span>
+<span class="line"><span>&lt;/div&gt;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>&lt;div&gt;</span></span>
+<span class="line"><span>  {isLoggedIn &amp;&amp; &lt;AdminPanel /&gt;}</span></span>
+<span class="line"><span>&lt;/div&gt;</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="渲染列表" tabindex="-1"><a class="header-anchor" href="#渲染列表"><span>渲染列表</span></a></h2><p>依赖 JavaScript 的特性，例如 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for" target="_blank" rel="noopener noreferrer"><code>for</code> 循环</a> 和 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/map" target="_blank" rel="noopener noreferrer">array 的 <code>map()</code> 函数</a> 来渲染组件列表</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>const products = [</span></span>
+<span class="line"><span>  { title: &#39;卷心菜&#39;, isFruit: false, id: 1 },</span></span>
+<span class="line"><span>  { title: &#39;大蒜&#39;, isFruit: false, id: 2 },</span></span>
+<span class="line"><span>  { title: &#39;苹果&#39;, isFruit: true, id: 3 },</span></span>
+<span class="line"><span>];</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>export default function ShoppingList() {</span></span>
+<span class="line"><span>  const listItems = products.map(product =&gt;</span></span>
+<span class="line"><span>    &lt;li</span></span>
+<span class="line"><span>      key={product.id}</span></span>
+<span class="line"><span>      style={{
+        color: product.isFruit ? &#39;magenta&#39; : &#39;darkgreen&#39;
+      }}</span></span>
+<span class="line"><span>    &gt;</span></span>
+<span class="line"><span>      {product.title}</span></span>
+<span class="line"><span>    &lt;/li&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;ul&gt;{listItems}&lt;/ul&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="响应事件" tabindex="-1"><a class="header-anchor" href="#响应事件"><span>响应事件</span></a></h2><p>你可以通过在组件中声明 <strong>事件处理</strong> 函数来响应事件：</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>function MyButton(){</span></span>
+<span class="line"><span>    function handleClick(){</span></span>
+<span class="line"><span>        alert(&#39;You clicked me!&#39;);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    return {</span></span>
+<span class="line"><span>        &lt;button onClick={handleClick}&gt;</span></span>
+<span class="line"><span>        	点我</span></span>
+<span class="line"><span>        &lt;/button&gt;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><blockquote><p>注意，<code>onClick={handleClick}</code> 的结尾没有小括号！不要 <strong>调用</strong> 事件处理函数：你只需 <strong>把函数传递给事件</strong> 即可。当用户点击按钮时 React 会调用你传递的事件处理函数。</p></blockquote><h2 id="更新界面" tabindex="-1"><a class="header-anchor" href="#更新界面"><span>更新界面</span></a></h2><p>状态管理，通常你会希望你的组件 “记住” 一些信息并展示出来，比如一个按钮被点击的次数。要做到这一点，你需要在你的组件中添加 <strong>state</strong></p><p>首先，从 React 引入 <a href="https://zh-hans.react.dev/reference/react/useState" target="_blank" rel="noopener noreferrer"><code>useState</code></a>：</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>import { useState } from &#39;react&#39;;</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div></div></div><p>以在你的组件中声明一个 <strong>state 变量</strong>：</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>function MyButton() {</span></span>
+<span class="line"><span>  const [count, setCount] = useState(0);</span></span>
+<span class="line"><span>  // ...</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>你将从 <code>useState</code> 中获得两样东西：当前的 state（<code>count</code>），以及用于更新它的函数（<code>setCount</code>）。你可以给它们起任何名字，但按照惯例会像 <code>[something, setSomething]</code> 这样为它们命名。</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>function MyButton() {</span></span>
+<span class="line"><span>  const [count, setCount] = useState(0);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  function handleClick() {</span></span>
+<span class="line"><span>    //当你想改变 state 时，调用 setCount() 并将新的值传递给它</span></span>
+<span class="line"><span>    setCount(count + 1);</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;button onClick={handleClick}&gt;</span></span>
+<span class="line"><span>      Clicked {count} times</span></span>
+<span class="line"><span>    &lt;/button&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="使用-hook" tabindex="-1"><a class="header-anchor" href="#使用-hook"><span>使用 Hook</span></a></h2><p>以 <code>use</code> 开头的函数被称为 <strong>Hook</strong>。<code>useState</code> 是 React 提供的一个内置 Hook。</p><p>可以在 <a href="https://zh-hans.react.dev/reference/react" target="_blank" rel="noopener noreferrer">React API 参考</a> 中找到其他内置的 Hook。你也可以通过组合现有的 Hook 来编写属于你自己的 Hook。</p><p>Hook 比普通函数更为严格。你只能在你的组件（或其他 Hook）的 <strong>顶层</strong> 调用 Hook。如果你想在一个条件或循环中使用 <code>useState</code>，请提取一个新的组件并在组件内部使用它。</p><h2 id="组件间共享数据" tabindex="-1"><a class="header-anchor" href="#组件间共享数据"><span>组件间共享数据</span></a></h2><p>我们通常需要组件间共享一份数据</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>import { useState } from &#39;react&#39;;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>export default function MyApp() {</span></span>
+<span class="line"><span>  const [count, setCount] = useState(0);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  function handleClick() {</span></span>
+<span class="line"><span>    setCount(count + 1);</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;div&gt;</span></span>
+<span class="line"><span>      &lt;h1&gt;共同更新的计数器&lt;/h1&gt;</span></span>
+<span class="line"><span>      &lt;MyButton count={count} onClick={handleClick} /&gt;</span></span>
+<span class="line"><span>      &lt;MyButton count={count} onClick={handleClick} /&gt;</span></span>
+<span class="line"><span>    &lt;/div&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>function MyButton({ count, onClick }) {</span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;button onClick={onClick}&gt;</span></span>
+<span class="line"><span>      点了 {count} 次</span></span>
+<span class="line"><span>    &lt;/button&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>使用这种方式传递的信息被称作 <strong>prop</strong>。此时 <code>MyApp</code> 组件包含了 <code>count</code> state 以及 <code>handleClick</code> 事件处理函数，并将它们作为 <strong>prop 传递给</strong> 了每个按钮。</p><h1 id="开发" tabindex="-1"><a class="header-anchor" href="#开发"><span>开发</span></a></h1><h2 id="安装" tabindex="-1"><a class="header-anchor" href="#安装"><span>安装</span></a></h2><p>安装Node.js</p><p>创建react应用</p><div class="language-w line-numbers-mode" data-highlighter="shiki" data-ext="w" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-w"><span class="line"><span>npx create-react-app my-react-app</span></span>
+<span class="line"><span>cd my-react-app</span></span>
+<span class="line"><span>npm start</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="井字棋项目" tabindex="-1"><a class="header-anchor" href="#井字棋项目"><span>井字棋项目</span></a></h2><p>创建好了项目之后</p><h3 id="来看app-js" tabindex="-1"><a class="header-anchor" href="#来看app-js"><span>来看<code>App.js</code></span></a></h3><p><code>App.js</code> 的代码创建了一个 <strong>组件</strong>。在 React 中，组件是一段可重用代码，它通常作为 UI 界面的一部分。</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>export default function Square() {</span></span>
+<span class="line"><span>  // 命名了一个函数，default 关键字表明它是文件中的主要函数。</span></span>
+<span class="line"><span>  return &lt;button className=&quot;square&quot;&gt;X&lt;/button&gt; </span></span>
+<span class="line"><span>    //JavaScript 的 return 关键字意味着后面的内容都作为值返回给函数的调用者。&lt;button&gt; 是一个 JSX 元素。</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="构建棋盘" tabindex="-1"><a class="header-anchor" href="#构建棋盘"><span>构建棋盘</span></a></h3><p>想要创建多个按钮</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>export default function Square() {</span></span>
+<span class="line"><span>  return &lt;button className=&quot;square&quot;&gt;X&lt;/button&gt;&lt;button className=&quot;square&quot;&gt;X&lt;/button&gt;;</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>会报错</p><p>React 组件必须返回单个 JSX 元素，不能像两个按钮那样返回多个相邻的 JSX 元素。可以使用 Fragment（<code>&lt;&gt;</code> 与 <code>&lt;/&gt;</code>）包裹多个相邻的 JSX 元素，如下所示：</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>export default function Square() {</span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;&gt;</span></span>
+<span class="line"><span>      &lt;button className=&quot;square&quot;&gt;X&lt;/button&gt;</span></span>
+<span class="line"><span>      &lt;button className=&quot;square&quot;&gt;X&lt;/button&gt;</span></span>
+<span class="line"><span>    &lt;/&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>最后需要9个方块</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>export default function Board() {//名称更改为 Board </span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;button className=&quot;square&quot;&gt;1&lt;/button&gt;</span></span>
+<span class="line"><span>        &lt;button className=&quot;square&quot;&gt;2&lt;/button&gt;</span></span>
+<span class="line"><span>        &lt;button className=&quot;square&quot;&gt;3&lt;/button&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;button className=&quot;square&quot;&gt;4&lt;/button&gt;</span></span>
+<span class="line"><span>        &lt;button className=&quot;square&quot;&gt;5&lt;/button&gt;</span></span>
+<span class="line"><span>        &lt;button className=&quot;square&quot;&gt;6&lt;/button&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;button className=&quot;square&quot;&gt;7&lt;/button&gt;</span></span>
+<span class="line"><span>        &lt;button className=&quot;square&quot;&gt;8&lt;/button&gt;</span></span>
+<span class="line"><span>        &lt;button className=&quot;square&quot;&gt;9&lt;/button&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>    &lt;/&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>但是样式还没渲染好，加上样式</p><div class="language-css line-numbers-mode" data-highlighter="shiki" data-ext="css" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-css"><span class="line"><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">.board-row</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;"> {</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  display: </span><span style="--shiki-light:#383A42;--shiki-dark:#D19A66;">flex</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  justify-content: </span><span style="--shiki-light:#383A42;--shiki-dark:#D19A66;">center</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  margin: </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">5</span><span style="--shiki-light:#986801;--shiki-dark:#E06C75;">px</span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;"> 0</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">.square</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;"> {</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  width: </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">60</span><span style="--shiki-light:#986801;--shiki-dark:#E06C75;">px</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  height: </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">60</span><span style="--shiki-light:#986801;--shiki-dark:#E06C75;">px</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  font-size: </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">24</span><span style="--shiki-light:#986801;--shiki-dark:#E06C75;">px</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  font-weight: </span><span style="--shiki-light:#383A42;--shiki-dark:#D19A66;">bold</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  color: </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">#</span><span style="--shiki-light:#0184BC;--shiki-dark:#D19A66;">333</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  background-color: </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">#</span><span style="--shiki-light:#0184BC;--shiki-dark:#D19A66;">f9f9f9</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  border: </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">2</span><span style="--shiki-light:#986801;--shiki-dark:#E06C75;">px</span><span style="--shiki-light:#383A42;--shiki-dark:#D19A66;"> solid</span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;"> #</span><span style="--shiki-light:#0184BC;--shiki-dark:#D19A66;">ddd</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  border-radius: </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">5</span><span style="--shiki-light:#986801;--shiki-dark:#E06C75;">px</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  cursor: </span><span style="--shiki-light:#383A42;--shiki-dark:#D19A66;">pointer</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  transition: </span><span style="--shiki-light:#383A42;--shiki-dark:#D19A66;">all</span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;"> 0.2</span><span style="--shiki-light:#986801;--shiki-dark:#E06C75;">s</span><span style="--shiki-light:#383A42;--shiki-dark:#D19A66;"> ease</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">.square</span><span style="--shiki-light:#986801;--shiki-dark:#56B6C2;">:hover</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;"> {</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  background-color: </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">#</span><span style="--shiki-light:#0184BC;--shiki-dark:#D19A66;">e6f7ff</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  border-color: </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">#</span><span style="--shiki-light:#0184BC;--shiki-dark:#D19A66;">1890ff</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">.square</span><span style="--shiki-light:#986801;--shiki-dark:#56B6C2;">:active</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;"> {</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  background-color: </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">#</span><span style="--shiki-light:#0184BC;--shiki-dark:#D19A66;">d6e4ff</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  border-color: </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">#</span><span style="--shiki-light:#0184BC;--shiki-dark:#D19A66;">2b8aef</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  transform: </span><span style="--shiki-light:#0184BC;--shiki-dark:#56B6C2;">scale</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">(</span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">0.95</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">);</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">.board</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;"> {</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  display: </span><span style="--shiki-light:#383A42;--shiki-dark:#D19A66;">flex</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  flex-direction: </span><span style="--shiki-light:#383A42;--shiki-dark:#D19A66;">column</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  align-items: </span><span style="--shiki-light:#383A42;--shiki-dark:#D19A66;">center</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  margin: </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">20</span><span style="--shiki-light:#986801;--shiki-dark:#E06C75;">px</span><span style="--shiki-light:#383A42;--shiki-dark:#D19A66;"> auto</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  padding: </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">20</span><span style="--shiki-light:#986801;--shiki-dark:#E06C75;">px</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  background-color: </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">#</span><span style="--shiki-light:#0184BC;--shiki-dark:#D19A66;">fff</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  border: </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">2</span><span style="--shiki-light:#986801;--shiki-dark:#E06C75;">px</span><span style="--shiki-light:#383A42;--shiki-dark:#D19A66;"> solid</span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;"> #</span><span style="--shiki-light:#0184BC;--shiki-dark:#D19A66;">ccc</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  border-radius: </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">10</span><span style="--shiki-light:#986801;--shiki-dark:#E06C75;">px</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  box-shadow: </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">0</span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;"> 4</span><span style="--shiki-light:#986801;--shiki-dark:#E06C75;">px</span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;"> 10</span><span style="--shiki-light:#986801;--shiki-dark:#E06C75;">px</span><span style="--shiki-light:#0184BC;--shiki-dark:#56B6C2;"> rgba</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">(</span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">0</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">, </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">0</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">, </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">0</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">, </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">0.1</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">);</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#E45649;--shiki-dark:#E06C75;">h1</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;"> {</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  font-size: </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">36</span><span style="--shiki-light:#986801;--shiki-dark:#E06C75;">px</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  color: </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">#</span><span style="--shiki-light:#0184BC;--shiki-dark:#D19A66;">333</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  text-align: </span><span style="--shiki-light:#383A42;--shiki-dark:#D19A66;">center</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">  margin-bottom: </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66;">20</span><span style="--shiki-light:#986801;--shiki-dark:#E06C75;">px</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">;</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF;">}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="通过props传递数据" tabindex="-1"><a class="header-anchor" href="#通过props传递数据"><span>通过props传递数据</span></a></h3><p>当用户单击方块时，我们要将方块的值从空更改为“X”，这样会不会是使用一个复用的组件提供他们调用就好了呢？</p><p>React 的组件架构可以创建可重用的组件，以避免混乱、重复的代码。</p><p>如下面的代码：</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>function Square({ value }) {</span></span>
+<span class="line"><span>  return &lt;button className=&quot;square&quot;&gt;{value}&lt;/button&gt;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>export default function Board() {</span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value=&quot;1&quot; /&gt;</span></span>
+<span class="line"><span>        &lt;Square value=&quot;2&quot; /&gt;</span></span>
+<span class="line"><span>        &lt;Square value=&quot;3&quot; /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value=&quot;4&quot; /&gt;</span></span>
+<span class="line"><span>        &lt;Square value=&quot;5&quot; /&gt;</span></span>
+<span class="line"><span>        &lt;Square value=&quot;6&quot; /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value=&quot;7&quot; /&gt;</span></span>
+<span class="line"><span>        &lt;Square value=&quot;8&quot; /&gt;</span></span>
+<span class="line"><span>        &lt;Square value=&quot;9&quot; /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>    &lt;/&gt;</span></span>
+<span class="line"><span>  )</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="创建一个具有交互性的组件" tabindex="-1"><a class="header-anchor" href="#创建一个具有交互性的组件"><span>创建一个具有交互性的组件</span></a></h3><p>当你单击它的时候，<code>Square</code> 组件需要显示“X”。在 <code>Square</code> 内部声明一个名为 <code>handleClick</code> 的函数。然后，将 <code>onClick</code> 添加到由 <code>Square</code> 返回的 JSX 元素的 button 的 props 中：</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>function Square({ value }) {</span></span>
+<span class="line"><span>  function handleClick() {</span></span>
+<span class="line"><span>    console.log(&#39;clicked!&#39;);</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;button</span></span>
+<span class="line"><span>      className=&quot;square&quot;</span></span>
+<span class="line"><span>      onClick={handleClick}</span></span>
+<span class="line"><span>    &gt;</span></span>
+<span class="line"><span>      {value}</span></span>
+<span class="line"><span>    &lt;/button&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>我们希望 Square 组件能够“记住”它被单击过，并用“X”填充它。为了“记住”一些东西，组件使用 <em><strong>state</strong></em>。</p><p>使用后如下：</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>import { useState } from &#39;react&#39;;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>function Square() {</span></span>
+<span class="line"><span>  const [value, setValue] = useState(null);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  function handleClick() {</span></span>
+<span class="line"><span>    setValue(&#39;X&#39;);</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;button</span></span>
+<span class="line"><span>      className=&quot;square&quot;</span></span>
+<span class="line"><span>      onClick={handleClick}</span></span>
+<span class="line"><span>    &gt;</span></span>
+<span class="line"><span>      {value}</span></span>
+<span class="line"><span>    &lt;/button&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>export default function Board() {</span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square /&gt;</span></span>
+<span class="line"><span>        &lt;Square /&gt;</span></span>
+<span class="line"><span>        &lt;Square /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square /&gt;</span></span>
+<span class="line"><span>        &lt;Square /&gt;</span></span>
+<span class="line"><span>        &lt;Square /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square /&gt;</span></span>
+<span class="line"><span>        &lt;Square /&gt;</span></span>
+<span class="line"><span>        &lt;Square /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>    &lt;/&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>过了一下基础的知识之后，我们就要：</p><h2 id="完成这个游戏" tabindex="-1"><a class="header-anchor" href="#完成这个游戏"><span>完成这个游戏！！</span></a></h2><p>我们现在有了棋盘的基本模块了，要实现完整的游戏：在需要在棋盘上交替放置“X”和“O”，并且需要一种确定获胜者的方法</p><h3 id="状态提升" tabindex="-1"><a class="header-anchor" href="#状态提升"><span>状态提升</span></a></h3><p>目前，每个 <code>Square</code> 组件都维护着游戏 state 的一部分。要检查井字棋游戏中的赢家，<code>Board</code> 需要以某种方式知道 9 个 <code>Square</code> 组件中每个组件的 state。</p><p><strong>要从多个子组件收集数据，或让两个子组件相互通信，请改为在其父组件中声明共享 state。父组件可以通过 props 将该 state 传回给子组件。这使子组件彼此同步并与其父组件保持同步。</strong></p><p>重构 React 组件时，将状态提升到父组件中</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>import { useState } from &#39;react&#39;;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>function Square({ value }) {</span></span>
+<span class="line"><span>  return &lt;button className=&quot;square&quot;&gt;{value}&lt;/button&gt;;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>export default function Board() {</span></span>
+<span class="line"><span>  const [squares, setSquares] = useState(Array(9).fill(null));</span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[0]} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[1]} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[2]} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[3]} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[4]} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[5]} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[6]} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[7]} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[8]} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>    &lt;/&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>在，每个 Square 都会收到一个 <code>value</code> props，对于空方块，该 props 将是 <code>&#39;X&#39;</code>、<code>&#39;O&#39;</code> 或 <code>null</code>。</p><p>下面创建点击事件，点击方块实现赋值</p><p>调用函数</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>function Square({ value, onSquareClick }) {</span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;button className=&quot;square&quot; onClick={onSquareClick}&gt;</span></span>
+<span class="line"><span>      {value}</span></span>
+<span class="line"><span>    &lt;/button&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><blockquote><p>JavaScript 支持 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures" target="_blank" rel="noopener noreferrer">闭包</a>，这意味着内部函数（例如 <code>handleClick</code>）可以访问外部函数（例如 <code>Board</code>）中定义的变量和函数。<code>handleClick</code> 函数可以读取 <code>squares</code> state 并调用 <code>setSquares</code> 方法，因为它们都是在 <code>Board</code> 函数内部定义的。</p></blockquote><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>import { useState } from &#39;react&#39;;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>function Square({ value, onSquareClick }) {</span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;button className=&quot;square&quot; onClick={onSquareClick}&gt;</span></span>
+<span class="line"><span>      {value}</span></span>
+<span class="line"><span>    &lt;/button&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>export default function Board() {</span></span>
+<span class="line"><span>  const [squares, setSquares] = useState(Array(9).fill(null));</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  function handleClick(i) {</span></span>
+<span class="line"><span>    const nextSquares = squares.slice(); //调用了 .slice() 来创建 squares 数组的副本</span></span>
+<span class="line"><span>    nextSquares[i] = &#39;X&#39;;</span></span>
+<span class="line"><span>    setSquares(nextSquares);</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[0]} onSquareClick={() =&gt; handleClick(0)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[1]} onSquareClick={() =&gt; handleClick(1)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[2]} onSquareClick={() =&gt; handleClick(2)} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[3]} onSquareClick={() =&gt; handleClick(3)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[4]} onSquareClick={() =&gt; handleClick(4)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[5]} onSquareClick={() =&gt; handleClick(5)} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[6]} onSquareClick={() =&gt; handleClick(6)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[7]} onSquareClick={() =&gt; handleClick(7)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[8]} onSquareClick={() =&gt; handleClick(8)} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>    &lt;/&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>现在，我们在 <code>Board</code> 组件中处理 state， <code>Board</code> 父组件将 props 传递给 <code>Square</code> 子组件，以便它们可以正确显示。</p><h3 id="交替落子" tabindex="-1"><a class="header-anchor" href="#交替落子"><span>交替落子</span></a></h3><p>每次玩家落子时，<code>xIsNext</code>（一个布尔值）将被翻转以确定下一个玩家，游戏 state 将被保存。你将更新 <code>Board</code> 的 <code>handleClick</code> 函数以翻转 <code>xIsNext</code> 的值：</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>export default function Board() {</span></span>
+<span class="line"><span>  const [xIsNext, setXIsNext] = useState(true);</span></span>
+<span class="line"><span>  const [squares, setSquares] = useState(Array(9).fill(null));</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  function handleClick(i) {</span></span>
+<span class="line"><span>    const nextSquares = squares.slice();</span></span>
+<span class="line"><span>    if (xIsNext) {</span></span>
+<span class="line"><span>      nextSquares[i] = &quot;X&quot;;</span></span>
+<span class="line"><span>    } else {</span></span>
+<span class="line"><span>      nextSquares[i] = &quot;O&quot;;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    setSquares(nextSquares);</span></span>
+<span class="line"><span>    setXIsNext(!xIsNext);</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    //...</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>要注意方块的覆盖问题 就是要做一个判断</p><p>完整代码如下：</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>import { useState } from &#39;react&#39;;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>function Square({value, onSquareClick}) {</span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;button className=&quot;square&quot; onClick={onSquareClick}&gt;</span></span>
+<span class="line"><span>      {value}</span></span>
+<span class="line"><span>    &lt;/button&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>export default function Board() {</span></span>
+<span class="line"><span>  const [xIsNext, setXIsNext] = useState(true);</span></span>
+<span class="line"><span>  const [squares, setSquares] = useState(Array(9).fill(null));</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  function handleClick(i) {</span></span>
+<span class="line"><span>    if (squares[i]) {</span></span>
+<span class="line"><span>      return;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    const nextSquares = squares.slice();</span></span>
+<span class="line"><span>    if (xIsNext) {</span></span>
+<span class="line"><span>      nextSquares[i] = &#39;X&#39;;</span></span>
+<span class="line"><span>    } else {</span></span>
+<span class="line"><span>      nextSquares[i] = &#39;O&#39;;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    setSquares(nextSquares);</span></span>
+<span class="line"><span>    setXIsNext(!xIsNext);</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[0]} onSquareClick={() =&gt; handleClick(0)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[1]} onSquareClick={() =&gt; handleClick(1)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[2]} onSquareClick={() =&gt; handleClick(2)} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[3]} onSquareClick={() =&gt; handleClick(3)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[4]} onSquareClick={() =&gt; handleClick(4)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[5]} onSquareClick={() =&gt; handleClick(5)} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[6]} onSquareClick={() =&gt; handleClick(6)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[7]} onSquareClick={() =&gt; handleClick(7)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[8]} onSquareClick={() =&gt; handleClick(8)} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>    &lt;/&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="宣布获胜者" tabindex="-1"><a class="header-anchor" href="#宣布获胜者"><span>宣布获胜者</span></a></h3><p>现在你可以轮流对战了，接下来我们应该显示游戏何时获胜。为此，你将添加一个名为 <code>calculateWinner</code> 的辅助函数用来判断是否获胜</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>export default function Board() {</span></span>
+<span class="line"><span>  //...</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>function calculateWinner(squares) {</span></span>
+<span class="line"><span>  const lines = [</span></span>
+<span class="line"><span>    [0, 1, 2],</span></span>
+<span class="line"><span>    [3, 4, 5],</span></span>
+<span class="line"><span>    [6, 7, 8],</span></span>
+<span class="line"><span>    [0, 3, 6],</span></span>
+<span class="line"><span>    [1, 4, 7],</span></span>
+<span class="line"><span>    [2, 5, 8],</span></span>
+<span class="line"><span>    [0, 4, 8],</span></span>
+<span class="line"><span>    [2, 4, 6]</span></span>
+<span class="line"><span>  ];</span></span>
+<span class="line"><span>  for (let i = 0; i &lt; lines.length; i++) {</span></span>
+<span class="line"><span>    const [a, b, c] = lines[i];</span></span>
+<span class="line"><span>    if (squares[a] &amp;&amp; squares[a] === squares[b] &amp;&amp; squares[a] === squares[c]) {</span></span>
+<span class="line"><span>      return squares[a];</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  return null;</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><blockquote><p>通过将辅助函数放在最后</p></blockquote><p>还有加上让执行这个函数以及显示玩家获胜的信息，完整代码如下：</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>import { useState } from &#39;react&#39;;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>function Square({value, onSquareClick}) {</span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;button className=&quot;square&quot; onClick={onSquareClick}&gt;</span></span>
+<span class="line"><span>      {value}</span></span>
+<span class="line"><span>    &lt;/button&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>export default function Board() {</span></span>
+<span class="line"><span>  const [xIsNext, setXIsNext] = useState(true);</span></span>
+<span class="line"><span>  const [squares, setSquares] = useState(Array(9).fill(null));</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  function handleClick(i) {</span></span>
+<span class="line"><span>    if (calculateWinner(squares) || squares[i]) {</span></span>
+<span class="line"><span>      return;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    const nextSquares = squares.slice();</span></span>
+<span class="line"><span>    if (xIsNext) {</span></span>
+<span class="line"><span>      nextSquares[i] = &#39;X&#39;;</span></span>
+<span class="line"><span>    } else {</span></span>
+<span class="line"><span>      nextSquares[i] = &#39;O&#39;;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    setSquares(nextSquares);</span></span>
+<span class="line"><span>    setXIsNext(!xIsNext);</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  const winner = calculateWinner(squares);</span></span>
+<span class="line"><span>  let status;</span></span>
+<span class="line"><span>  if (winner) {</span></span>
+<span class="line"><span>    status = &#39;Winner: &#39; + winner;</span></span>
+<span class="line"><span>  } else {</span></span>
+<span class="line"><span>    status = &#39;Next player: &#39; + (xIsNext ? &#39;X&#39; : &#39;O&#39;);</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;status&quot;&gt;{status}&lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[0]} onSquareClick={() =&gt; handleClick(0)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[1]} onSquareClick={() =&gt; handleClick(1)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[2]} onSquareClick={() =&gt; handleClick(2)} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[3]} onSquareClick={() =&gt; handleClick(3)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[4]} onSquareClick={() =&gt; handleClick(4)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[5]} onSquareClick={() =&gt; handleClick(5)} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[6]} onSquareClick={() =&gt; handleClick(6)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[7]} onSquareClick={() =&gt; handleClick(7)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[8]} onSquareClick={() =&gt; handleClick(8)} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>    &lt;/&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>function calculateWinner(squares) {</span></span>
+<span class="line"><span>  const lines = [</span></span>
+<span class="line"><span>    [0, 1, 2],</span></span>
+<span class="line"><span>    [3, 4, 5],</span></span>
+<span class="line"><span>    [6, 7, 8],</span></span>
+<span class="line"><span>    [0, 3, 6],</span></span>
+<span class="line"><span>    [1, 4, 7],</span></span>
+<span class="line"><span>    [2, 5, 8],</span></span>
+<span class="line"><span>    [0, 4, 8],</span></span>
+<span class="line"><span>    [2, 4, 6],</span></span>
+<span class="line"><span>  ];</span></span>
+<span class="line"><span>  for (let i = 0; i &lt; lines.length; i++) {</span></span>
+<span class="line"><span>    const [a, b, c] = lines[i];</span></span>
+<span class="line"><span>    if (squares[a] &amp;&amp; squares[a] === squares[b] &amp;&amp; squares[a] === squares[c]) {</span></span>
+<span class="line"><span>      return squares[a];</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  return null;</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="添加时间旅行" tabindex="-1"><a class="header-anchor" href="#添加时间旅行"><span>添加时间旅行</span></a></h2><p>作为最后的练习，让我们能够“回到”到游戏中之前的动作。</p><h3 id="存储落子历史" tabindex="-1"><a class="header-anchor" href="#存储落子历史"><span>存储落子历史</span></a></h3><p>之前创造的数组的副本就是为了时间旅行做准备的</p><p>所以创造一个<code>history</code> 的数组</p><h3 id="再一次-状态提升" tabindex="-1"><a class="header-anchor" href="#再一次-状态提升"><span>再一次“状态提升”</span></a></h3><p>现在将编写一个名为 <code>Game</code> 的新顶级组件来显示过去的着法列表。这就是放置包含整个游戏历史的 <code>history</code> state 的地方。</p><p>将 <code>history</code> state 放入 <code>Game</code> 组件将使你可以从其 <code>Board</code> 子组件中删除 <code>squares</code> state。</p><p>首先，添加一个带有 <code>export default</code> 的 <code>Game</code> 组件。让它渲染 <code>Board</code> 组件和一些标签：</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>function Board() {</span></span>
+<span class="line"><span>  // ...</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>export default function Game() {</span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;div className=&quot;game&quot;&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;game-board&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Board /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;game-info&quot;&gt;</span></span>
+<span class="line"><span>        &lt;ol&gt;{/*TODO*/}&lt;/ol&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>    &lt;/div&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>向 <code>Game</code> 组件添加一些 state 以跟踪下一个玩家和落子历史：</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>export default function Game() {</span></span>
+<span class="line"><span>  const [xIsNext, setXIsNext] = useState(true);</span></span>
+<span class="line"><span>  const [history, setHistory] = useState([Array(9).fill(null)]);</span></span>
+<span class="line"><span>  const currentSquares = history[history.length - 1];</span></span>
+<span class="line"><span>  // ...</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>接下来，在 <code>Game</code> 组件中创建一个 <code>handlePlay</code> 函数，<code>Board</code> 组件将调用该函数来更新游戏。将 <code>xIsNext</code>、<code>currentSquares</code> 和 <code>handlePlay</code> 作为 props 传递给 <code>Board</code> 组件：</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>export default function Game() {</span></span>
+<span class="line"><span>  const [xIsNext, setXIsNext] = useState(true);</span></span>
+<span class="line"><span>  const [history, setHistory] = useState([Array(9).fill(null)]);</span></span>
+<span class="line"><span>  const currentSquares = history[history.length - 1];</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  function handlePlay(nextSquares) {</span></span>
+<span class="line"><span>    // TODO</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;div className=&quot;game&quot;&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;game-board&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} /&gt;</span></span>
+<span class="line"><span>        //...</span></span>
+<span class="line"><span>  )</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>完整代码：</p><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>import { useState } from &#39;react&#39;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>function Square({ value, onSquareClick }) {</span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;button className=&quot;square&quot; onClick={onSquareClick}&gt;</span></span>
+<span class="line"><span>      {value}</span></span>
+<span class="line"><span>    &lt;/button&gt;</span></span>
+<span class="line"><span>  )</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>function Board({ xIsNext, squares, onPlay }) {</span></span>
+<span class="line"><span>  function handleClick(i) {</span></span>
+<span class="line"><span>    if (calculateWinner(squares) || squares[i]) {</span></span>
+<span class="line"><span>      return</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    const nextSquares = squares.slice()</span></span>
+<span class="line"><span>    if (xIsNext) {</span></span>
+<span class="line"><span>      nextSquares[i] = &#39;X&#39;</span></span>
+<span class="line"><span>    } else {</span></span>
+<span class="line"><span>      nextSquares[i] = &#39;O&#39;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    onPlay(nextSquares)</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  const winner = calculateWinner(squares)</span></span>
+<span class="line"><span>  let status</span></span>
+<span class="line"><span>  if (winner) {</span></span>
+<span class="line"><span>    status = &#39;Winner: &#39; + winner</span></span>
+<span class="line"><span>  } else {</span></span>
+<span class="line"><span>    status = &#39;Next player: &#39; + (xIsNext ? &#39;X&#39; : &#39;O&#39;)</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;status&quot;&gt;{status}&lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[0]} onSquareClick={() =&gt; handleClick(0)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[1]} onSquareClick={() =&gt; handleClick(1)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[2]} onSquareClick={() =&gt; handleClick(2)} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[3]} onSquareClick={() =&gt; handleClick(3)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[4]} onSquareClick={() =&gt; handleClick(4)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[5]} onSquareClick={() =&gt; handleClick(5)} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[6]} onSquareClick={() =&gt; handleClick(6)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[7]} onSquareClick={() =&gt; handleClick(7)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[8]} onSquareClick={() =&gt; handleClick(8)} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>    &lt;/&gt;</span></span>
+<span class="line"><span>  )</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>export default function Game() {</span></span>
+<span class="line"><span>  const [xIsNext, setXIsNext] = useState(true)</span></span>
+<span class="line"><span>  const [history, setHistory] = useState([Array(9).fill(null)])</span></span>
+<span class="line"><span>  const currentSquares = history[history.length - 1]</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  function handlePlay(nextSquares) {</span></span>
+<span class="line"><span>    setHistory([...history, nextSquares])</span></span>
+<span class="line"><span>    setXIsNext(!xIsNext)</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;div className=&quot;game&quot;&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;game-board&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;game-info&quot;&gt;</span></span>
+<span class="line"><span>        &lt;ol&gt;{/*TODO*/}&lt;/ol&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>    &lt;/div&gt;</span></span>
+<span class="line"><span>  )</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>function calculateWinner(squares) {</span></span>
+<span class="line"><span>  const lines = [</span></span>
+<span class="line"><span>    [0, 1, 2],</span></span>
+<span class="line"><span>    [3, 4, 5],</span></span>
+<span class="line"><span>    [6, 7, 8],</span></span>
+<span class="line"><span>    [0, 3, 6],</span></span>
+<span class="line"><span>    [1, 4, 7],</span></span>
+<span class="line"><span>    [2, 5, 8],</span></span>
+<span class="line"><span>    [0, 4, 8],</span></span>
+<span class="line"><span>    [2, 4, 6],</span></span>
+<span class="line"><span>  ]</span></span>
+<span class="line"><span>  for (let i = 0; i &lt; lines.length; i++) {</span></span>
+<span class="line"><span>    const [a, b, c] = lines[i]</span></span>
+<span class="line"><span>    if (squares[a] &amp;&amp; squares[a] === squares[b] &amp;&amp; squares[a] === squares[c]) {</span></span>
+<span class="line"><span>      return squares[a]</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  return null</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="显示过去的落子" tabindex="-1"><a class="header-anchor" href="#显示过去的落子"><span>显示过去的落子</span></a></h3><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>import { useState } from &#39;react&#39;;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>function Square({ value, onSquareClick }) {</span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;button className=&quot;square&quot; onClick={onSquareClick}&gt;</span></span>
+<span class="line"><span>      {value}</span></span>
+<span class="line"><span>    &lt;/button&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>function Board({ xIsNext, squares, onPlay }) {</span></span>
+<span class="line"><span>  function handleClick(i) {</span></span>
+<span class="line"><span>    if (calculateWinner(squares) || squares[i]) {</span></span>
+<span class="line"><span>      return;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    const nextSquares = squares.slice();</span></span>
+<span class="line"><span>    if (xIsNext) {</span></span>
+<span class="line"><span>      nextSquares[i] = &#39;X&#39;;</span></span>
+<span class="line"><span>    } else {</span></span>
+<span class="line"><span>      nextSquares[i] = &#39;O&#39;;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    onPlay(nextSquares);</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  const winner = calculateWinner(squares);</span></span>
+<span class="line"><span>  let status;</span></span>
+<span class="line"><span>  if (winner) {</span></span>
+<span class="line"><span>    status = &#39;Winner: &#39; + winner;</span></span>
+<span class="line"><span>  } else {</span></span>
+<span class="line"><span>    status = &#39;Next player: &#39; + (xIsNext ? &#39;X&#39; : &#39;O&#39;);</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;status&quot;&gt;{status}&lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[0]} onSquareClick={() =&gt; handleClick(0)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[1]} onSquareClick={() =&gt; handleClick(1)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[2]} onSquareClick={() =&gt; handleClick(2)} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[3]} onSquareClick={() =&gt; handleClick(3)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[4]} onSquareClick={() =&gt; handleClick(4)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[5]} onSquareClick={() =&gt; handleClick(5)} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[6]} onSquareClick={() =&gt; handleClick(6)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[7]} onSquareClick={() =&gt; handleClick(7)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[8]} onSquareClick={() =&gt; handleClick(8)} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>    &lt;/&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>export default function Game() {</span></span>
+<span class="line"><span>  const [xIsNext, setXIsNext] = useState(true);</span></span>
+<span class="line"><span>  const [history, setHistory] = useState([Array(9).fill(null)]);</span></span>
+<span class="line"><span>  const currentSquares = history[history.length - 1];</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  function handlePlay(nextSquares) {</span></span>
+<span class="line"><span>    setHistory([...history, nextSquares]);</span></span>
+<span class="line"><span>    setXIsNext(!xIsNext);</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  function jumpTo(nextMove) {</span></span>
+<span class="line"><span>    // TODO</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  const moves = history.map((squares, move) =&gt; {</span></span>
+<span class="line"><span>    let description;</span></span>
+<span class="line"><span>    if (move &gt; 0) {</span></span>
+<span class="line"><span>      description = &#39;Go to move #&#39; + move;</span></span>
+<span class="line"><span>    } else {</span></span>
+<span class="line"><span>      description = &#39;Go to game start&#39;;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    return (</span></span>
+<span class="line"><span>      &lt;li&gt;</span></span>
+<span class="line"><span>        &lt;button onClick={() =&gt; jumpTo(move)}&gt;{description}&lt;/button&gt;</span></span>
+<span class="line"><span>      &lt;/li&gt;</span></span>
+<span class="line"><span>    );</span></span>
+<span class="line"><span>  });</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;div className=&quot;game&quot;&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;game-board&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;game-info&quot;&gt;</span></span>
+<span class="line"><span>        &lt;ol&gt;{moves}&lt;/ol&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>    &lt;/div&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>function calculateWinner(squares) {</span></span>
+<span class="line"><span>  const lines = [</span></span>
+<span class="line"><span>    [0, 1, 2],</span></span>
+<span class="line"><span>    [3, 4, 5],</span></span>
+<span class="line"><span>    [6, 7, 8],</span></span>
+<span class="line"><span>    [0, 3, 6],</span></span>
+<span class="line"><span>    [1, 4, 7],</span></span>
+<span class="line"><span>    [2, 5, 8],</span></span>
+<span class="line"><span>    [0, 4, 8],</span></span>
+<span class="line"><span>    [2, 4, 6],</span></span>
+<span class="line"><span>  ];</span></span>
+<span class="line"><span>  for (let i = 0; i &lt; lines.length; i++) {</span></span>
+<span class="line"><span>    const [a, b, c] = lines[i];</span></span>
+<span class="line"><span>    if (squares[a] &amp;&amp; squares[a] === squares[b] &amp;&amp; squares[a] === squares[c]) {</span></span>
+<span class="line"><span>      return squares[a];</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  return null;</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="实现时间旅行" tabindex="-1"><a class="header-anchor" href="#实现时间旅行"><span>实现时间旅行</span></a></h3><div class="language-react line-numbers-mode" data-highlighter="shiki" data-ext="react" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-react"><span class="line"><span>import { useState } from &#39;react&#39;;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>function Square({ value, onSquareClick }) {</span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;button className=&quot;square&quot; onClick={onSquareClick}&gt;</span></span>
+<span class="line"><span>      {value}</span></span>
+<span class="line"><span>    &lt;/button&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>function Board({ xIsNext, squares, onPlay }) {</span></span>
+<span class="line"><span>  function handleClick(i) {</span></span>
+<span class="line"><span>    if (calculateWinner(squares) || squares[i]) {</span></span>
+<span class="line"><span>      return;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    const nextSquares = squares.slice();</span></span>
+<span class="line"><span>    if (xIsNext) {</span></span>
+<span class="line"><span>      nextSquares[i] = &#39;X&#39;;</span></span>
+<span class="line"><span>    } else {</span></span>
+<span class="line"><span>      nextSquares[i] = &#39;O&#39;;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    onPlay(nextSquares);</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  const winner = calculateWinner(squares);</span></span>
+<span class="line"><span>  let status;</span></span>
+<span class="line"><span>  if (winner) {</span></span>
+<span class="line"><span>    status = &#39;Winner: &#39; + winner;</span></span>
+<span class="line"><span>  } else {</span></span>
+<span class="line"><span>    status = &#39;Next player: &#39; + (xIsNext ? &#39;X&#39; : &#39;O&#39;);</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;status&quot;&gt;{status}&lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[0]} onSquareClick={() =&gt; handleClick(0)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[1]} onSquareClick={() =&gt; handleClick(1)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[2]} onSquareClick={() =&gt; handleClick(2)} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[3]} onSquareClick={() =&gt; handleClick(3)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[4]} onSquareClick={() =&gt; handleClick(4)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[5]} onSquareClick={() =&gt; handleClick(5)} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;board-row&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[6]} onSquareClick={() =&gt; handleClick(6)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[7]} onSquareClick={() =&gt; handleClick(7)} /&gt;</span></span>
+<span class="line"><span>        &lt;Square value={squares[8]} onSquareClick={() =&gt; handleClick(8)} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>    &lt;/&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>export default function Game() {</span></span>
+<span class="line"><span>  const [history, setHistory] = useState([Array(9).fill(null)]);</span></span>
+<span class="line"><span>  const [currentMove, setCurrentMove] = useState(0);</span></span>
+<span class="line"><span>  const xIsNext = currentMove % 2 === 0;</span></span>
+<span class="line"><span>  const currentSquares = history[currentMove];</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  function handlePlay(nextSquares) {</span></span>
+<span class="line"><span>    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];</span></span>
+<span class="line"><span>    setHistory(nextHistory);</span></span>
+<span class="line"><span>    setCurrentMove(nextHistory.length - 1);</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  function jumpTo(nextMove) {</span></span>
+<span class="line"><span>    setCurrentMove(nextMove);</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  const moves = history.map((squares, move) =&gt; {</span></span>
+<span class="line"><span>    let description;</span></span>
+<span class="line"><span>    if (move &gt; 0) {</span></span>
+<span class="line"><span>      description = &#39;Go to move #&#39; + move;</span></span>
+<span class="line"><span>    } else {</span></span>
+<span class="line"><span>      description = &#39;Go to game start&#39;;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    return (</span></span>
+<span class="line"><span>      &lt;li key={move}&gt;</span></span>
+<span class="line"><span>        &lt;button onClick={() =&gt; jumpTo(move)}&gt;{description}&lt;/button&gt;</span></span>
+<span class="line"><span>      &lt;/li&gt;</span></span>
+<span class="line"><span>    );</span></span>
+<span class="line"><span>  });</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  return (</span></span>
+<span class="line"><span>    &lt;div className=&quot;game&quot;&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;game-board&quot;&gt;</span></span>
+<span class="line"><span>        &lt;Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} /&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>      &lt;div className=&quot;game-info&quot;&gt;</span></span>
+<span class="line"><span>        &lt;ol&gt;{moves}&lt;/ol&gt;</span></span>
+<span class="line"><span>      &lt;/div&gt;</span></span>
+<span class="line"><span>    &lt;/div&gt;</span></span>
+<span class="line"><span>  );</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>function calculateWinner(squares) {</span></span>
+<span class="line"><span>  const lines = [</span></span>
+<span class="line"><span>    [0, 1, 2],</span></span>
+<span class="line"><span>    [3, 4, 5],</span></span>
+<span class="line"><span>    [6, 7, 8],</span></span>
+<span class="line"><span>    [0, 3, 6],</span></span>
+<span class="line"><span>    [1, 4, 7],</span></span>
+<span class="line"><span>    [2, 5, 8],</span></span>
+<span class="line"><span>    [0, 4, 8],</span></span>
+<span class="line"><span>    [2, 4, 6],</span></span>
+<span class="line"><span>  ];</span></span>
+<span class="line"><span>  for (let i = 0; i &lt; lines.length; i++) {</span></span>
+<span class="line"><span>    const [a, b, c] = lines[i];</span></span>
+<span class="line"><span>    if (squares[a] &amp;&amp; squares[a] === squares[b] &amp;&amp; squares[a] === squares[c]) {</span></span>
+<span class="line"><span>      return squares[a];</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  return null;</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>最后再来个加强版的如下：</p></div><!----><!----><!----></div><footer class="vp-page-meta"><!----><div class="vp-meta-item git-info"><!----><!----></div></footer><nav class="vp-page-nav"><a class="route-link auto-link prev" href="/learning-share/studyNote/ssr.html" aria-label="学习 SSR"><div class="hint"><span class="arrow start"></span>上一页</div><div class="link"><!---->学习 SSR</div></a><a class="route-link auto-link next" href="/learning-share/studyNote/regular-expression.html" aria-label="正则表达式"><div class="hint">下一页<span class="arrow end"></span></div><div class="link">正则表达式<!----></div></a></nav><!----><!----><!--]--></main><!--]--><footer class="vp-footer-wrapper" vp-footer><div class="vp-footer">KlayPeter的学习博客</div><div class="vp-copyright">Copyright © 2025 KlayPeter </div></footer></div><!--]--><!--]--><!--[--><!----><!--[--><!--]--><!--]--><!--]--></div>
+    <script type="module" src="/learning-share/assets/app-6qBmPyyI.js" defer></script>
+  </body>
+</html>
